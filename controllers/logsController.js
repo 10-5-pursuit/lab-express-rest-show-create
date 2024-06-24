@@ -2,10 +2,21 @@ const express = require("express");
 const captains = express.Router();
 const logsArray = require("../models/log");
 
+// SHOW
+captains.get("/:arrayIndex", (req, res) => {
+    const index = req.params.arrayIndex;
+    if (index < 0 || index >= logsArray.length){
+        res.redirect("/");
+    }
+    else {
+        res.json(logsArray[index]);
+    }
+})
+
 // INDEX
 captains.get("/", (req, res) => {
     let sortedCaptains = [];
-    if(!req.query.order){
+    if(!Object.keys(req.query).length){
         sortedCaptains = logsArray;
     } else if (req.query.order === "asc"){
         sortedCaptains = logsArray.sort((x, y) => { 
