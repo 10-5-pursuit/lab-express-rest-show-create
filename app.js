@@ -5,6 +5,9 @@ const logsController = require("./controllers/logsController");
 // CONFIGURATION
 const app = express();
 
+// MIDDLEWARE
+app.use(express.json()); // Parse incoming JSON
+
 // ROUTES
 app.get("/", (req, res) => {
     res.send("WELCOME TO THE CAPTAIN'S LOG");
