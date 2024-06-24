@@ -11,7 +11,7 @@ captains.get('/:arrayIndex', (req, res) => {
     if(captainsArray[arrayIndex]){
         res.status(200).json(captainsArray[arrayIndex])
     } else {
-        res.status(404).json( {error: `Doesn't exist`});
+        res.redirect('/*');
     }
 })
 

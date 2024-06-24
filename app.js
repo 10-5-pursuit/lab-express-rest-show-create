@@ -12,8 +12,8 @@ app.get('/', (req, res) => {
 app.use(express.json());
 app.use('/captains', captainsController)
 
-app.get('*', (req, res) => {
-    res.status(404).send(' error: Route cannot be found')
+app.get('/*', (req, res) => {
+    res.status(404).send(' error: cannot be found')
 })
 
 module.exports = app;
