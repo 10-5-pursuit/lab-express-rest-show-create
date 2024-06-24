@@ -1,15 +1,17 @@
 const express = require('express')
 
-const ShippingController = require('./controllers/shippingController')
+const logController = require('./controllers/logsController')
 
 const app = express()
 
+app.use(express.json())
+
 app.get('/', ( req,res )=> {
-    res.send('Welcome to REST SHOW and Create!')
+    res.send("welcome to the captain's log!")
 
 })
 
-app.use('/logs', ShippingController)
+app.use('/logs', logController)
 
 
 
