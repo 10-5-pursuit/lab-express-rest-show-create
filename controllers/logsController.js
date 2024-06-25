@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-let logs = require('../models/logs');
+let logs = require('../models/log.js');
 
 // Index Route
 router.get('/', (req, res) => {
