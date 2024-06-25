@@ -1,11 +1,7 @@
 const express = require("express");
-
 const logs = express.Router();
-
-// Import the logs model
 const logsArray = require("../../models/log");
 
-// Validation function
 function validateLog(data) {
   const {
     captainName,
@@ -28,11 +24,33 @@ function validateLog(data) {
 
 // HTML response for index
 logs.get("/", (req, res) => {
-  let html = "<ul>";
+  let html = `
+    <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; display: flex; justify-content: center; }
+          h1 { color: #333; text-align: center; }
+          ul { list-style-type: none; padding: 0; }
+          li { margin: 10px 0; }
+          a { text-decoration: none; color: #0066cc; }
+          a:hover { text-decoration: underline; }
+          .log-box { border: 1px solid #ccc; padding: 8px; border-radius: 5px; background-color: #f9f9f9; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); }
+        </style>
+      </head>
+      <body>
+        <div>
+          <h1>Logs</h1>
+          <ul>
+  `;
   logsArray.forEach((log, index) => {
-    html += `<li><a href="/v2/logs/${index}">${log.title}</a></li>`;
+    html += `<li class="log-box"><a href="/v2/logs/${index}">${log.title}</a></li>`;
   });
-  html += "</ul>";
+  html += `
+          </ul>
+        </div>
+      </body>
+    </html>
+  `;
   res.send(html);
 });
 
@@ -46,12 +64,29 @@ logs.get("/:index", (req, res) => {
   }
 
   let html = `
-    <h1>${log.title}</h1>
-    <p>${log.post}</p>
-    <p><strong>Captain Name:</strong> ${log.captainName}</p>
-    <p><strong>Mistakes Were Made Today:</strong> ${log.mistakesWereMadeToday}</p>
-    <p><strong>Days Since Last Crisis:</strong> ${log.daysSinceLastCrisis}</p>
-    <a href="/v2/logs">Back</a>
+    <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; margin: 20px; display: flex; justify-content: center; }
+          h1 { color: #333; text-align: center; }
+          p { color: #555; }
+          .log-details { border: 1px solid #ccc; padding: 20px; border-radius: 5px; background-color: #f9f9f9; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); max-width: 600px; max-height:300px;}
+          .back { margin-top: 20px; display: inline-block; }
+          .back a { text-decoration: none; color: #0066cc; }
+          .back a:hover { text-decoration: underline; }
+        </style>
+      </head>
+      <body>
+        <div class="log-details">
+          <h1>${log.title}</h1>
+          <p>${log.post}</p>
+          <p><strong>Captain Name:</strong> ${log.captainName}</p>
+          <p><strong>Mistakes Were Made Today:</strong> ${log.mistakesWereMadeToday}</p>
+          <p><strong>Days Since Last Crisis:</strong> ${log.daysSinceLastCrisis}</p>
+          <div class="back"><a href="/v2/logs">Back</a></div>
+        </div>
+      </body>
+    </html>
   `;
   res.send(html);
 });
