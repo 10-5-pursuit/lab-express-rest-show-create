@@ -36,9 +36,21 @@ captains.get("/", (req, res) => {
     res.json(sortedCaptains);
 })
 
+// POST
 captains.post("/", (req, res) => {
     logsArray.push(req.body);
     res.json(logsArray[logsArray.length - 1]);
 });
+
+// DELETE
+captains.delete("/:index", (req, res) => {
+    const { index } = req.params;
+    if (logsArray[index]){
+      logsArray.splice(index, 1);
+      res.redirect("/logs");
+    } else {
+      res.status(404).json({ error: "Not Found" })
+    }
+  });
 
 module.exports = captains;
