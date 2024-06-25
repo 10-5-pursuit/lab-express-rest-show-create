@@ -24,7 +24,7 @@ By the end, your app should have the following functionality
 |  4  | Destroy | /logs/:id |  DELETE   | **D**elete |             Delete a log              |
 |  5  | Update  | /logs/:id |    PUT    | **U**pdate |             Update a log              |
 
-There are tests that where you can check your progress. By the end, you should have all tests passing. Bonuses in each section are not required to pass the assignment.
+There are tests where you can check your progress. By the end, you should have all tests passing. Bonuses in each section are not required to pass the assignment.
 
 If you finish ahead of time you can try the bonus challenges in each section, or work on `express-ufo`, [work on some code challenges](add link) or continue polishing your Bootstrap CSS skills.
 
