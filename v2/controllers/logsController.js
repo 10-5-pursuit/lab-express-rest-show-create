@@ -74,4 +74,23 @@ logs.post("/", (req, res) => {
     );
 });
 
+// PUT Route: updates a log
+logs.put("/:arrayIndex", (req, res) => {
+  const { arrayIndex } = req.params;
+  const error = validateLog(req.body);
+
+  if (error) {
+    return res
+      .status(400)
+      .send(`<p style="color:red;">${error}</p><a href="/v2/logs">Back</a>`);
+  }
+
+  if (logsArray[arrayIndex]) {
+    logsArray[arrayIndex] = req.body;
+    res.status(200).json(logsArray[arrayIndex]);
+  } else {
+    res.status(418).json({ error: "Not Found" });
+  }
+});
+
 module.exports = logs;
