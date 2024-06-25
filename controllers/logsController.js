@@ -63,6 +63,12 @@ const logsArray = require("../models/log");
 
 // Index Routes: gets all of the logs
 // localhost:4001/logs/
+// Index Routes: gets all of the logs
+// localhost:4001/logs/
+logs.get("/", (req, res) => {
+  res.json(logsArray);
+});
+
 logs.get("/", (req, res) => {
   let filteredLogs = [...logsArray];
 

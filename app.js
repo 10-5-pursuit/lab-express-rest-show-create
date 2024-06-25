@@ -33,8 +33,35 @@ app.use("/logs", logsController);
 app.use("/v2/logs", logsControllerV2);
 
 // Home Route
+// app.get("/", (req, res) => {
+//   res.send("Welcome to the Captains Log");
+// });
+
 app.get("/", (req, res) => {
-  res.send("Welcome to the Captains Log");
+  // Adding HTML with inline CSS for styling
+  res.send(`
+    <html>
+      <head>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            text-align: center;
+          }
+          .welcome-message {
+            margin-top: 100px;
+            font-size: 24px;
+            color: #333;
+          }
+        </style>
+      </head>
+      <body>
+        <div class="welcome-message">
+          Welcome to the Captain's Log
+        </div>
+      </body>
+    </html>
+  `);
 });
 
 module.exports = app;
