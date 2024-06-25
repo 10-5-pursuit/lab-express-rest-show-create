@@ -53,4 +53,15 @@ captains.delete("/:index", (req, res) => {
     }
   });
 
+// UPDATE
+captains.put("/:index", (req, res) => {
+    const { index } = req.params;
+    if (index < 0 || index >= logsArray.length){
+        res.status(404).json({ error: "Log Not Found"})
+    } else {
+        logsArray[index] = req.body;
+        res.redirect(`/logs/${index}`);
+    }
+});
+
 module.exports = captains;
