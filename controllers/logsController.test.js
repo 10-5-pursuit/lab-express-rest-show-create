@@ -1,7 +1,7 @@
 const request = require("supertest");
 
 const logs = require("../app.js");
-let logsArray = require("../models/log.js");
+let logsArray = require("../models/logs.js");
 
 describe("logs", () => {
   let originalLogsArray = logsArray;
@@ -27,7 +27,7 @@ describe("logs", () => {
           title: "Stars",
           post: "Today I contemplated that there sure are a lot of stars in the sky",
           mistakesWereMadeToday: true,
-          daysSinceLastCrisis: "10",
+          daysSinceLastCrisis: 10,
         };
 
         await new Promise((resolve) => {
