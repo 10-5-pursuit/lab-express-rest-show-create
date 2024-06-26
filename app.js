@@ -1,6 +1,5 @@
 const express = require('express');
 const personelController = require('./controllers/shipPersonelController');
-const logsController = require('./v2/controllers/logsControllers');
 
 const app = express();
 
