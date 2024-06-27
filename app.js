@@ -1,11 +1,13 @@
 // DEPENDENCIES
 const express = require("express");
 const logsController = require("./controllers/logsController");
+const cors = require("cors");
 
 // CONFIGURATION
 const app = express();
 
 // MIDDLEWARE
+app.use(cors());
 app.use(express.json()); // Parse incoming JSON
 
 // ROUTES
