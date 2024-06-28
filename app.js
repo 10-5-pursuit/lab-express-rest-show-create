@@ -15,10 +15,8 @@ app.use('/logs', logController)
 
 
 
-app.use((req, res) => {
-
-    res.status(404).send('<h1> No appropriate Directory Found! </h1>')
-
+app.get('*', (req, res) => {
+    res.status(404).json( { error: "404 Page Not Found" })
 })
 
 

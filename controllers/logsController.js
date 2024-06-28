@@ -26,4 +26,16 @@ logs.post('/',( req,res ) => {
 
 })
 
+logs.delete('/:index', (req, res)=>{
+    const { index } = req.params
+
+    if(logsArray[index]) {
+        logsArray.splice(index, 1)
+        res.status(200).json({message: 'Successfully removed Captains Log'})
+    } else {
+        res.status(404).json({error: "Captain Log Not Found!"})
+    }
+
+})
+
 module.exports = logs
