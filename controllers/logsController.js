@@ -33,7 +33,7 @@ captains.get("/", (req, res) => {
             else return -1;
         })
     }
-    res.status(200).send("Logs sent successfully");
+    res.status(200).json(sortedCaptains);
 })
 
 // POST
