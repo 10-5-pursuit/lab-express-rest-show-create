@@ -1,27 +1,27 @@
 const request = require("supertest");
 
-const logs = require("../app.js");
-let logsArray = require("../models/log.js");
+const captains = require("../app.js");
+let captainsArray = require("../models/captains.js");
 
 describe("logs", () => {
-  let originalLogsArray = logsArray;
+  let originalLogsArray = captainsArray;
 
   beforeEach(() => {
-    logsArray = originalLogsArray;
+    captainsArray = originalLogsArray;
   });
 
-  describe("/logs", () => {
+  describe("/captains", () => {
     describe("GET", () => {
       it("sends the logs array", async () => {
-        const response = await request(logs).get("/logs");
+        const response = await request(captains).get("/captains");
 
-        expect(JSON.parse(response.text)).toEqual(logsArray);
+        expect(JSON.parse(response.text)).toEqual(captainsArray);
       });
     });
 
     describe("POST", () => {
       it("adds new log to end of logs array", async () => {
-        const newLastArrayPosition = logsArray.length;
+        const newLastArrayPosition = captainsArray.length;
         const newLog = {
           captainName: "Picard",
           title: "Stars",
@@ -31,30 +31,30 @@ describe("logs", () => {
         };
 
         await new Promise((resolve) => {
-          request(logs)
-            .post(`/logs`)
+          request(captains)
+            .post(`/captains`)
             .send(newLog)
             .set("Accept", "application/json")
-            .expect("headers.location", "/logs")
+            .expect("headers.location", "/captains")
             .expect("statusCode", 303)
             .end(resolve);
         });
 
-        expect(logsArray[newLastArrayPosition]).toEqual(newLog);
+        expect(captainsArray[newLastArrayPosition]).toEqual(newLog);
       });
     });
   });
 
-  describe("/logs/:arrayIndex", () => {
+  describe("/captains/:arrayIndex", () => {
     describe("GET", () => {
       it("sends the corresponding log when a valid index is given", async () => {
-        const response = await request(logs).get("/logs/1");
+        const response = await request(captains).get("/captains/1");
 
-        expect(JSON.parse(response.text)).toEqual(logsArray[1]);
+        expect(JSON.parse(response.text)).toEqual(captainsArray[1]);
       });
 
       it("sends a redirect when an invalid index is given", async () => {
-        const response = await request(logs).get("/logs/9001");
+        const response = await request(captains).get("/captains/9001");
 
         expect(response.redirect).toBe(true);
       });
@@ -62,11 +62,11 @@ describe("logs", () => {
 
     describe("PUT", () => {
       it("replaces the index in the logs array", async () => {
-        const updatedLog = logsArray[0];
+        const updatedLog = captainsArray[0];
 
         await new Promise((resolve) => {
-          request(logs)
-            .put("/logs/0")
+          request(captains)
+            .put("/captains/0")
             .send(updatedLog)
             .set("Accept", "application/json")
             .expect("headers.location", "/logs/")
@@ -74,25 +74,25 @@ describe("logs", () => {
             .end(resolve);
         });
 
-        expect(logsArray[0]).toEqual(updatedLog);
+        expect(captainsArray[0]).toEqual(updatedLog);
       });
     });
 
     describe("DELETE", () => {
       it("deletes at the index in the logs array", async () => {
-        const logToDelete = logsArray[2];
-        const originalLength = logsArray.length;
+        const logToDelete = captainsArray[2];
+        const originalLength = captainsArray.length;
         await new Promise((resolve) => {
-          request(logs)
-            .delete("/logs/2")
+          request(captains)
+            .delete("/captains/2")
             .set("Accept", "application/json")
-            .expect("headers.location", "/logs")
+            .expect("headers.location", "/captains")
             .expect("statusCode", 303)
             .end(resolve);
         });
 
-        expect(logsArray[2]).toEqual(originalLogsArray[2]);
-        expect(logsArray).toHaveLength(originalLength - 1);
+        expect(captainsArray[2]).toEqual(originalLogsArray[2]);
+        expect(captainsArray).toHaveLength(originalLength - 1);
       });
     });
   });
