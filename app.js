@@ -1,8 +1,10 @@
 const express = require('express');
 const personelController = require('./controllers/shipPersonelController');
+const cors = require('cors');
 
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 
 app.use('/personel', personelController);
