@@ -1,3 +1,4 @@
+// controllers/logsController.js
 const express = require('express');
 const router = express.Router();
 const logsArray = require('../models/log');
@@ -83,4 +84,4 @@ router.delete('/:index', (req, res) => {
   }
 });
 
-module.exports = router;
+module.exports = { router };

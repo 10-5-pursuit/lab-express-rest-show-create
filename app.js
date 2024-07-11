@@ -1,13 +1,17 @@
 // app.js
 const express = require('express');
+const cors = require('cors');
 const app = express();
 const logsController = require('./controllers/logsController');
-const logsV2Controller = require('./controllers/v2/logsController'); // Import v2 controller
+const logsV2Controller = require('./controllers/v2/logsController'); 
+
+// Enable CORS for all origins (for development)
+app.use(cors()); 
 
 // Middleware
 app.use(express.json());
-app.use('/logs', logsController);
-app.use('/v2/logs', logsV2Controller); // Set up v2 route
+app.use('/logs', logsController.router);
+app.use('/v2/logs', logsV2Controller.router); // Set up v2 route
 
 // Routes
 app.get('/', (req, res) => {
