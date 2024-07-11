@@ -1,3 +1,4 @@
+// validations/logsValidator.js
 const validateLog = (log) => {
   const {
     captainName,
@@ -7,16 +8,20 @@ const validateLog = (log) => {
     daysSinceLastCrisis,
   } = log;
 
+  // Convert daysSinceLastCrisis to a number
+  const daysSinceLastCrisisNum = Number(daysSinceLastCrisis);
+
   // Logging the input to debug
   console.log('Validating log:', log);
 
+  // Check if the conversion was successful and the number is non-negative
   if (
     !captainName ||
     !title ||
     !post ||
     typeof mistakesWereMadeToday !== 'boolean' ||
-    typeof daysSinceLastCrisis !== 'number' ||
-    daysSinceLastCrisis < 0
+    isNaN(daysSinceLastCrisisNum) || // Check if it's a valid number
+    daysSinceLastCrisisNum < 0
   ) {
     console.log('Validation failed: missing or incorrect type');
     return false;

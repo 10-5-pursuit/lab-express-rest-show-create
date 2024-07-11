@@ -61,15 +61,21 @@ router.get('/:index', (req, res) => {
 // PUT /logs/:index - Replace the log at the given index
 router.put('/:index', (req, res) => {
   const { index } = req.params;
+  const updatedLog = req.body;
+  console.log('Received data:', updatedLog); // Log the received data
+
   if (logsArray[index]) {
-    if (validateLog(req.body)) {
-      logsArray[index] = req.body;
-      res.json(req.body);
+    // Validate the updated log data
+    if (validateLog(updatedLog)) {
+      // Update the log in your data store (logsArray)
+      logsArray[index] = updatedLog;
+      res.json(updatedLog); // Send the updated log
     } else {
+      console.log('Validation failed'); // Log if validation fails
       res.status(400).json({ error: 'Invalid log format' });
     }
   } else {
-    res.status(404).json({ error: 'Not Found' });
+    res.status(404).json({ error: 'Log not found' });
   }
 });
 
